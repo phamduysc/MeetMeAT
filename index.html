@@ -1,62 +1,65 @@
-<!DOCTYPE html>
-<html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>ISOCHRONE V1</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" /><link rel='stylesheet' href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css'>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css'><link rel="stylesheet" href="./style.css">
-
+  <title>Chucka mate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css">
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css">
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div id="map"></div>
+  <!-- Map container -->
+  <div id="map"></div>
 
-<div class="absolute fl my24 mx24 py24 px24 bg-gray-faint round">
-  <form id="params">
-    <h4 class="txt-m txt-bold mb6">Travel mode - Phương tiện di chuyển:</h4>
-    <div class="mb12 mr12 toggle-group align-center">
-      <label class="toggle-container">
-        <input name="profile" type="radio" value="walking" />
-        <div class="toggle toggle--active-null toggle--null">Walking - đi bộ</div>
-      </label>
-      <label class="toggle-container">
-        <input name="profile" type="radio" value="cycling" checked />
-        <div class="toggle toggle--active-null toggle--null">Cycling - đạp xe</div>
-      </label>
-      <label class="toggle-container">
-        <input name="profile" type="radio" value="driving" />
-        <div class="toggle toggle--active-null toggle--null">Driving - lái xe</div>
-      </label>
-    </div>
-    <h4 class="txt-m txt-bold mb6">Travel duration - Thời gian di chuyển:</h4>
-    <div class="mb12 mr12 toggle-group align-center">
-      <label class="toggle-container">
-        <input name="duration" type="radio" value="5" checked />
-        <div class="toggle toggle--active-null toggle--null">5 min</div>
-      </label>
-      <label class="toggle-container">
-        <input name="duration" type="radio" value="10" checked />
-        <div class="toggle toggle--active-null toggle--null">10 min</div>
-      </label>
-      <label class="toggle-container">
-        <input name="duration" type="radio" value="20" />
-        <div class="toggle toggle--active-null toggle--null">20 min</div>
-      </label>
-      <label class="toggle-container">
-        <input name="duration" type="radio" value="30" />
-        <div class="toggle toggle--active-null toggle--null">30 min</div>
-      </label>
-      <label class="toggle-container">
-        <input name="duration" type="radio" value="60" />
-        <div class="toggle toggle--active-null toggle--null">1 hour</div>
-      </label>
-    </div>
+  <!-- Controls container -->
+  <div class="controls">
+    <form id="params">
+      <div class="control-group">
+        <div class="toggle-group">
+          <label class="toggle-container">
+            <input name="profile" type="radio" value="walking" />
+            <div class="toggle">Walking</div>
+          </label>
+          <label class="toggle-container">
+            <input name="profile" type="radio" value="cycling" checked />
+            <div class="toggle">Cycling</div>
+          </label>
+          <label class="toggle-container">
+            <input name="profile" type="radio" value="driving" />
+            <div class="toggle">Driving</div>
+          </label>
+        </div>
+      </div>
 
-  </form>
-</div>
-<!-- partial -->
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
-<script src='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.js'></script><script  src="./script.js"></script>
+      <div class="control-group">
+        <div class="slider-container">
+          <input type="range" id="duration-slider" name="duration" min="5" max="60" step="5" value="10" />
+          <span id="slider-value">10 min</span>
+        </div>
+      </div>
+    </form>
 
+    <!-- Button to add new markers -->
+    <button id="add-marker" class="btn-add-marker">More buddy</button>
+
+    <!-- Button to export isochrones as KML -->
+    <button id="export-kml" class="btn-export-kml">Export KML</button>
+    <!-- Button reset -->
+    <button id="btn-reset" class="btn-reset">Reset</button> 
+    <!-- Container for dynamically added geocoders -->
+    <div id="dynamic-search-container" class="search-container"></div>
+  </div>
+
+  <!-- Include Mapbox GL JS -->
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+  <!-- Include Mapbox GL Geocoder plugin -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+  <!-- Include Turf.js for geospatial calculations -->
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <!-- Include toKML library for KML export -->
+  <script src="https://unpkg.com/tokml@0.2.0/dist/tokml.min.js"></script>
+  <!-- Include custom script -->
+  <script src="./script.js"></script>
+  <script src="https://unpkg.com/tokml@0.4.0/tokml.js"></script>
 </body>
-</html>
